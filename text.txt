@@ -1,0 +1,22 @@
+def generate_pdf(request):
+    template_path = 'cv_app/preview.html'
+    user_data = UserProfile.objects.last()
+
+    profile_picture_path = os.path.join(settings.MEDIA_ROOT, str(user_data.profile_picture))
+    profile_picture_data = open(profile_picture_path, "rb").read()
+
+    context = {'user_profile': user_data, 'profile_picture_data': profile_picture_data}
+    template = get_template(template_path)
+    html = template.render(context)
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="user_profile.pdf"'
+
+    pisa.CreatePDF(html, dest=response, link_callback=request_callback)
+    return response
+
+def request_callback(uri, rel):
+    if rel.startswith(settings.MEDIA_URL):
+        path = os.path.join(settings.MEDIA_ROOT, rel.replace(settings.MEDIA_URL, ''))
+        return path
+    return uri

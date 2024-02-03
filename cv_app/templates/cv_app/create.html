@@ -1,0 +1,12 @@
+{% extends 'cv_app/base.html' %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data" action="{% if form.instance.id %}{% url 'preview' user_id=form.instance.id %}{% else %}{% url 'create' %}{% endif %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Preview</button>
+    </form>
+{% endblock %}
+
+
+

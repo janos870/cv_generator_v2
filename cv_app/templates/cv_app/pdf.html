@@ -1,0 +1,10 @@
+{% extends 'cv_app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h2>Profile Preview</h2>
+    <img src="{{ user_profile.profile_picture_base64 }}" alt="Profile Picture" width="100">
+    <p><strong>Full Name:</strong> {{ user_profile.full_name }}</p>
+    <p><strong>Email:</strong> {{ user_profile.email }}</p>
+    <p><strong>Bio:</strong> {{ user_profile.bio }}
+{% endblock %}
