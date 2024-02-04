@@ -23,6 +23,10 @@ def preview(request, user_id):
     return render(request, 'cv_app/preview.html', {'user_profile': user_profile})
 
 
+def cv_list(request):
+    user_profiles = UserProfile.objects.all()
+    return render(request, 'cv_app/cv_list.html', {'user_profiles': user_profiles})
+
 #-------------------------------------CONVERT TO PDF-----------------------------------------#
 
 def convert_image_to_base64(image_path):
@@ -36,8 +40,8 @@ def render_to_pdf(template_path, context_dict):
     # Replace image paths with base64 encoded images
     profile_picture_path = context_dict.get('user_profile').profile_picture.path
     profile_picture_base64 = convert_image_to_base64(profile_picture_path)
-    html = html.replace('{{ profile_picture.url }}', f'data:image/jpeg;base64,{profile_picture_base64}')
 
+    html = html.replace('{{ profile_picture.url }}', f'data:image/jpeg;base64,{profile_picture_base64}')
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="profile_preview.pdf"'
 
@@ -56,8 +60,8 @@ def convert_to_pdf(request, user_id):
     # Image conversation base64-be
     profile_picture_path = user_profile.profile_picture.path
     profile_picture_base64 = convert_image_to_base64(profile_picture_path)
-    context['user_profile'].profile_picture_base64 = f'data:image/jpeg;base64,{profile_picture_base64}'
 
+    context['user_profile'].profile_picture_base64 = f'data:image/jpeg;base64,{profile_picture_base64}'
     pdf = render_to_pdf('cv_app/pdf.html', context)
     return pdf
 

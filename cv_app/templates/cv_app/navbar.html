@@ -1,0 +1,48 @@
+{% load static %}
+
+<nav aria-label="main navigation" class="navbar" role="navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item is-flex" href="{% url 'create' %}">
+            <img class="mr-2" src="{% static 'img/logo.png' %}" alt="logo">
+            <span>CV-GENERATOR</span>
+        </a>
+
+        <!-- Hamburger ikon a mobil nézetben -->
+        <a aria-expanded="false" aria-label="menu" class="navbar-burger" data-target="navbarBasicExample" role="button">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div class="navbar-menu" id="navbarBasicExample">
+        <div class="navbar-end">
+            <div class="navbar-item has-text-centered">
+                <a class="navbar-item" href="{% url 'create' %}">
+                    Home
+                </a>
+
+                <a class="navbar-item" href="{% url 'cv_list' %}">
+                    Cv-List
+                </a>
+
+                <a class="navbar-item" href="#">
+                    Contact
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Kattintásra a hamburger ikon megnyitja vagy bezárja a menüt
+      const burger = document.querySelector('.navbar-burger');
+      const menu = document.querySelector('.navbar-menu');
+
+      burger.addEventListener('click', () => {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+      });
+    });
+</script>

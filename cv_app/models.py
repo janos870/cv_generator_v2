@@ -7,3 +7,6 @@ class UserProfile(models.Model):
     email = models.EmailField()
     bio = models.TextField()
     profile_picture = models.ImageField(upload_to='media/profile_pictures/')
+
+    def __str__(self):
+        return self.full_name

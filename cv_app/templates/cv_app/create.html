@@ -1,12 +1,87 @@
 {% extends 'cv_app/base.html' %}
+{% load static %}
 
 {% block content %}
-    <form method="post" enctype="multipart/form-data" action="{% if form.instance.id %}{% url 'preview' user_id=form.instance.id %}{% else %}{% url 'create' %}{% endif %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Preview</button>
-    </form>
+{% include 'cv_app/navbar.html' %}
+
+<div class="create container">
+    <div class="columns">
+        <div class="intro column my-5 px-5">
+            <h1 class="is-size-3">Üdvözöllek a CV-generátorban!</h1>
+            <p>Örülök, hogy itt vagy! Ezen az oldalon könnyedén létrehozhatod a személyes önéletrajzodat. Töltsd ki az
+                alábbi mezőket, és nézd meg, hogyan alakul az önéletrajzod élő előnézeti nézetben. Próbáld ki most!</p>
+
+            <div class="is-flex mt-5 is-defaultgap">
+                <img class="mr-2" src="{% static 'img/logo.png' %}" width="100">
+                <img class="mr-2" src="{% static 'img/cv.png' %}" width="100">
+                <img src="{% static 'img/resume.png' %}" width="100">
+            </div>
+        </div>
+
+        <form action="{% if form.instance.id %}{% url 'preview' user_id=form.instance.id %}{% else %}{% url 'create' %}{% endif %}"
+              class="column my-5 px-5 box has-shadow" enctype="multipart/form-data"
+              method="post">
+            {% csrf_token %}
+            <header class="is-fullhd">
+                <h3 class="mb-2 is-size-4">CV Generálása</h3>
+                <p class="mb-4">
+                    Adj meg néhány alapvető információt magadról, és hozz létre egyedi önéletrajzodat.
+                </p>
+            </header>
+            <hr>
+
+
+            <div class="field">
+                <label class="label" for="{{ form.full_name.id_for_label }}">Teljes Név</label>
+                <div class="control">
+                    {{ form.full_name }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="{{ form.email.id_for_label }}">Email</label>
+                <div class="control">
+                    {{ form.email }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="{{ form.bio.id_for_label }}">Bio</label>
+                <div class="control">
+                    {{ form.bio }}
+                </div>
+            </div>
+
+            <div class="is-flex">
+                <div class="field">
+                    <label class="label button is-light" for="{{ form.profile_picture.id_for_label }}">
+                    <span class="icon is-small mr-2">
+                        <i class="fa fa-upload"></i>
+                    </span>
+                        Upload Photo
+                    </label>
+                    <div class="control">
+                        {{ form.profile_picture }}
+                    </div>
+                </div>
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link" type="submit">Generate CV</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% include 'cv_app/footer.html' %}
 {% endblock %}
+
+
+
+
+
+
 
 
 
