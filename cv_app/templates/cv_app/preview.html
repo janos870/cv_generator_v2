@@ -3,13 +3,33 @@
 
 {% block content %}
 {% include 'cv_app/navbar.html' %}
-<h2>Profile Preview</h2>
-<img alt="Profile Picture" src="{{ user_profile.profile_picture.url }}" width="100">
-<p><strong>Full Name:</strong> {{ user_profile.full_name }}</p>
-<p><strong>Email:</strong> {{ user_profile.email }}</p>
-<p><strong>Bio:</strong> {{ user_profile.bio }}</p>
 
-<a class="mt-2 button is-info is-active" href="{% url 'convert_to_pdf' user_id=user_profile.id  %}" target="_blank">Download</a>
+<div class="preview">
+    <h2>Profile Preview</h2>
+    <div>
+        <figure>
+            <img alt="Profile Picture" src="{{ user_profile.profile_picture.url }}" width="80">
+        </figure>
+        <div>
+            <h1>{{ user_profile.full_name }}</h1>
+            <h3>{{ user_profile.profession }}</h3>
+        </div>
+
+    </div>
+    <hr>
+    <div>
+        <p><strong>Email:</strong> {{ user_profile.email }}</p>
+        <p><strong>Education:</strong> {{ user_profile.education }}</p>
+        <p><strong>Experience:</strong> {{ user_profile.experience }}</p>
+        <p><strong>Skills:</strong> {{ user_profile.skills }}</p>
+        <p><strong>Language:</strong> {{ user_profile.language }}</p>
+        <p><strong>Website:</strong> {{ user_profile.website }}</p>
+        <p><strong>Bio:</strong> {{ user_profile.bio }}</p>
+        <a href="{% url 'convert_to_pdf' user_id=user_profile.id  %}" target="_blank">Download</a>
+    </div>
+</div>
+
+
 
 
 {% include 'cv_app/footer.html' %}

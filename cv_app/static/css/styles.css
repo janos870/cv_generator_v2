@@ -38,10 +38,32 @@ a:hover {
 /* CV LIST STYLES */
   .cv-list {
     background: #11111;
-    margin-top: 50px;
+    margin-top: 20px;
  }
   .cv-list:hover {
     background: #f1f2f2;
+ }
+
+ /* PREVIEW STYLES */
+ /*.preview {
+    width: 50%;
+    margin: 50px auto;
+ }
+
+ .preview h2 {
+    margin: 50px auto;
+    font-size: 30px;
+ } */
+/*
+ .preview img {
+    border-radius: 50%;
+ } */
+
+ @media (max-width: 768px) {
+    .preview {
+        width: 100%;
+        margin: 50px 5px;
+    }
  }
 
  /*--------------------------------DARK THEME--------------------------------*/
